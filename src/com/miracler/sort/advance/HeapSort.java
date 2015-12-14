@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class HeapSort {
 	public static void sink(int[] arr, int parentNode, int n) {
-		int leftNode=parentNode*2,rightNode=parentNode*2+1,maxNode=parentNode;
+		int maxNode=parentNode,leftNode=2*parentNode,rightNode=parentNode*2+1;
 		if(leftNode<=n&&arr[leftNode-1]>arr[maxNode-1]){
 			maxNode=leftNode;
 		}
@@ -13,8 +13,9 @@ public class HeapSort {
 		}
 		if(maxNode!=parentNode){
 			swap(arr, parentNode-1, maxNode-1);
-			sink(arr, maxNode, n);
+			sink(arr, parentNode, n);
 		}
+		
 	}
 	public static void sink2(int[] arr, int parentNode,int n){
 		int leftNode=parentNode*2,rightNode=parentNode*2+1,minNode=parentNode;
@@ -26,7 +27,7 @@ public class HeapSort {
 		}
 		if(minNode!=parentNode){
 			swap(arr, parentNode-1, minNode-1);
-			sink2(arr, minNode, n);
+			sink2(arr, parentNode, n);
 		}
 		
 	}
@@ -62,7 +63,7 @@ public class HeapSort {
 		int length=arr.length;
 		while (length>0) {
 			swap(arr, 0, --length);
-			sink(arr, 1, length);
+			sink(arr,1, length);
 		}
 	}
 	
@@ -77,8 +78,8 @@ public class HeapSort {
 	public static void main(String[] args) {
 		int[] arr = new int[] { 323, 3, 65, 23, 786, 231,2};
 		//System.out.println(min(arr));
-		buildHeap2(arr);
-		sort2(arr);
+		buildHeap(arr);
+		sort(arr);
 		System.out.println(Arrays.toString(arr));
 		
 	}

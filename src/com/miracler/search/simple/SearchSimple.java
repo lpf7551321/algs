@@ -12,7 +12,7 @@ public class SearchSimple {
 	static boolean search(int[] arr,int target){
 		int len=arr.length,result=0;
 		int[] arr_=new int[len+1];
-		for(int i=0;i<=len-1;i++){
+		for(int i=0;i<len;i++){
 			arr_[i]=arr[i];
 		}
 		arr_[len]=target;

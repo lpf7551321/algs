@@ -9,23 +9,29 @@ public class Bisection {
 		int[] arr = new int[] { 323, 3, 65, 23, 786, 231 };
 		HeapSort.sort(arr);
 		System.out.println(Arrays.toString(arr));
-		System.out.println(find(arr, 3));
+		System.out.println(find(arr, 65));
 	}
 
 	public static int find(int[] arr, int target) {
-		int start=0,end=arr.length-1;
-		while(start<=end){
-			int mid=(start+end)/2;
-			if(arr[mid]<target){
-				start=mid+1;
-			}
-			else if (arr[mid]>target) {
+		int length = arr.length;
+		int mid = 0, start = 0, end = length - 1;
+		while (start < end) {
+			mid = (start + end) / 2;
+			if (arr[mid] < target) {
+				start = mid + 1;
+			} else if (arr[mid] > target) {
 				end=mid;
-			}
-			else {
+			}else {
 				return mid;
 			}
 		}
 		return -1;
+
 	}
+	/**
+	 * 
+	 * int start=0,end=arr.length-1; while(start<=end){ int mid=(start+end)/2;
+	 * if(arr[mid]<target){ start=mid+1; } else if (arr[mid]>target) { end=mid;
+	 * } else { return mid; } } return -1;
+	 */
 }

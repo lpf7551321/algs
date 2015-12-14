@@ -1,5 +1,6 @@
 package com.miracler.sort.tree;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -7,78 +8,68 @@ import java.util.List;
 
 import org.hamcrest.core.Is;
 
+import com.sun.org.apache.xpath.internal.axes.NodeSequence;
+
 import sun.reflect.generics.tree.Tree;
 
 
 public class TreeIterator {
-	static List<TreeNode> nodes=new LinkedList<TreeNode>();
-	public TreeIterator(int N) {
-	}
-	public static void createTree(int N) {
-		for(int i=0;i<N;i++){
-			nodes.add(new TreeNode(i, null, null));
+	static List<TreeNode> trees=new LinkedList<TreeNode>();
+	
+	static public void createTree(int n){
+		for(int i=0;i<n;i++){
+			trees.add(new TreeNode(i, null, null));
 		}
-		int  parentNode=N/2;
-		for(int k=0;k<=parentNode-1;k++){
-			nodes.get(k).leftChild=nodes.get(2*k+1);
-			nodes.get(k).rightChild=nodes.get(2*k+2);
-		}
+		for(int k=0;k<n/2-1;k++){
+			trees.get(k).leftChild=trees.get(k*2+1);
+			trees.get(k).rightChild=trees.get(k*2+2);
+		} 
 		
-		int lastParentNod=parentNode/2-1;
-		nodes.get(lastParentNod).leftChild=nodes.get(lastParentNod*2+1);
-		if(nodes.get(lastParentNod*2+2)!=null){
-			nodes.get(lastParentNod).rightChild=nodes.get(lastParentNod*2+2);
+	
+		int parentNode=n/2;
+		trees.get(parentNode-1).leftChild=trees.get((parentNode-1)*2+1);
+		if(trees.get((parentNode-1)*2+2)!=null){
+			trees.get(parentNode-1).rightChild=trees.get((parentNode-1)*2+2);
 		}
-			
-		
 	}
-	public static void preTraverse(TreeNode node) {
+	public static void main(String[] args) {
+		createTree(9);
+		preTraverse(trees.get(0));
+		System.out.println();
+		postTraverse(trees.get(0));
+		System.out.println();
+		midTraverse(trees.get(0));
+	}
+	
+	static void preTraverse(TreeNode node){
 		if(node!=null){
 			System.out.print(node.data);
 		}
 		else {
-			return ;
+			return;
 		}
 		preTraverse(node.leftChild);
 		preTraverse(node.rightChild);
-	
 	}
-	public static void inTraverse(TreeNode node) {
+	static public void postTraverse(TreeNode node){
 		if(node==null){
-			return;
-		}
-		
-		inTraverse(node.leftChild);
-		System.out.print(node.data);
-		inTraverse(node.rightChild);
-	}
-	public static void postTraverse(TreeNode node) {
-		if(node==null){
-			return;
+			return ;
 		}
 		postTraverse(node.leftChild);
 		postTraverse(node.rightChild);
 		System.out.print(node.data);
 	}
 	
-	public static void main(String[] args) {
-		createTree(9);
-		Iterator<TreeNode> it=nodes.iterator();
-		while (it.hasNext()) {
-			System.out.println(it.next().data);
+	static public void midTraverse(TreeNode node){
+		if(node==null){
+			return;
 		}
-		TreeNode root=nodes.get(0);
-		System.out.println("前序遍历");
-		preTraverse(root);
-		System.out.println("");
-		System.out.println("中序遍历");
-		inTraverse(root);
-		System.out.println("");
-		System.out.println("后序遍历");
-		postTraverse(root);
-		
-		
+		midTraverse(node.leftChild);
+		System.out.print(node.data);
+		midTraverse(node.rightChild);
 	}
+	
+	
 	/**
 	 * 	for(int i=0;i<N;i++){
 			nodes.add(new TreeNode(i, null, null));

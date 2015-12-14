@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class SimpleSort {
 	public static void main(String[] args) {
-		int[] arr = new int[] { 3,2, 1, 323, 4, 23 };
+		int[] arr = new int[] { 3,2, 1, 323, 4, 23,100 };
 		System.out.println(Arrays.toString(BubbleSort(arr)));
 		System.out.println(Arrays.toString(SelectedSort(arr)));
 		System.out.println(Arrays.toString(insertSort(arr)));
@@ -12,10 +12,10 @@ public class SimpleSort {
 	}
 
 	public static int[] insertSort(int[] arr) {
-		int length = arr.length;
+		int length=arr.length;
 		for(int i=0;i<length-1;i++){
-			for (int j = i; j >=0; j--) {
-				if(arr[j+1]<arr[j])swap(arr, j, j+1);
+			for(int j=length-1;j>i;j--){
+				if(arr[j]<arr[i])swap(arr, i, j);
 			}
 		}
 		return arr;
@@ -29,12 +29,10 @@ public class SimpleSort {
 	 */
 	static int[] BubbleSort(int[] arr) {
 		int length=arr.length;
-		for(int i=0;i<length-1;i++){
-			for (int j = 0; j < length-1; j++) {
-				if(arr[j]>arr[j+1])swap(arr, j, j+1);
-				
+		for(int i=0;i<length-1;i++)
+			for(int j=0;j<length-1-i;j++){
+				if(arr[j+1]<arr[j])swap(arr, j, j+1);
 			}
-		}
 		return arr;
 	}
 
@@ -50,9 +48,8 @@ public class SimpleSort {
 		int min=0;
 		for(int i=0;i<length-1;i++){
 			min=i;
-			for (int j = i+1; j < length; j++) {
-				if(arr[min]>arr[j])min=j;
-				
+			for(int j=i+1;j<length;j++){
+				if(arr[i]>arr[j])min=j;
 			}
 			swap(arr, min, i);
 		}
@@ -64,4 +61,7 @@ public class SimpleSort {
 		arr[a] = arr[b];
 		arr[b] = tmp;
 	}
+	/*
+	 * 
+	 */
 }

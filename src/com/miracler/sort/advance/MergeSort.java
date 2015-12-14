@@ -23,7 +23,6 @@ public class MergeSort {
 		for(int k=lo;k<=hi;k++){
 			aux[k]=arr[k];
 		}
-		
 		for(int k=lo;k<=hi;k++){
 			if(i>mid)arr[k]=aux[j++];
 			else if(j>hi)arr[k]=aux[i++];
@@ -32,13 +31,12 @@ public class MergeSort {
 				arr[k]=aux[j++];
 			}
 		}
-		
 	}
 	public static void main(String[] args) {
+		
 		int[] arr=new int[]{3234,323,1,65,23,786,231};
 		new MergeSort(arr);
 		System.out.println(Arrays.toString(arr));
+		
 	}
-	
-	
 }
